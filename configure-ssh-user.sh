@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Set default values for SSH_USERNAME and PASSWORD if not provided
-: ${SSH_USERNAME:=ubuntu}
-: ${PASSWORD:=changeme}
+: ${SSH_USERNAME:=ansible}
+: ${PASSWORD:=ansible}
 
 # Create the user with the provided username and set the password
 useradd -ms /bin/bash $SSH_USERNAME
@@ -16,4 +16,4 @@ if [ -n "$AUTHORIZED_KEYS" ]; then
 fi
 
 # Start the SSH server
-/usr/sbin/sshd -D
+#/usr/sbin/sshd -D

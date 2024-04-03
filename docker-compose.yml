@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  ubuntu_ssh1:
+    image: ubuntu_ssh:latest
+    command: bash -c "/usr/sbin/sshd -D"
+    ports:
+      - "2221:22"
+  ubuntu_ssh2:
+    image: ubuntu_ssh:latest
+    command: bash -c "/usr/sbin/sshd -D"
+    ports:
+      - "2222:22"
+  ansible_core:
+    image: ansible-core:latest
+    command: bash -c "/usr/sbin/sshd -D"
+    ports:
+      - "2223:22"
+      
