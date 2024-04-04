@@ -21,6 +21,12 @@ docker build -t my-ubuntu_sshd:latest -f ./Dockerfile_ubuntu .
 ### Build ubuntu with ansible core ansible_core image
 docker build -t ansible-core:latest -f ./Dockerfile_ansible .
 ```
+### Data volume mapped on ansible-core
+To provide a volume that contains the ansible configuration folder, a volume named data-volume is mounted in /data at ansible-core image.
+This provide access to files within this container as an easy way to open from host machine to edit files in any IDE or VisualStudioCode
+
+    volumes:
+      - .\ansible_core\data-volume:/data
 
 ### Running 2 ubuntu containers and ansible-core
 
