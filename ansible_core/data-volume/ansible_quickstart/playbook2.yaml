@@ -7,7 +7,6 @@
         changed_when: false
 
       - name: Cambiar PubkeyAuthentication yes por PubkeyAuthentication no
-        state: absent
         replace:
           path: /etc/ssh/sshd_config
           regexp: '^PubkeyAuthentication yes'
