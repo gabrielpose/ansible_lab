@@ -8,7 +8,6 @@ To get started, clone the GitHub  [repository](https://github.com/gabrielpose/an
 
 ```bash
 git clone (https://github.com/gabrielpose/ansible_lab.git)
-cd ubuntu-sshd
 ```
 
 ### Building the Docker Images
