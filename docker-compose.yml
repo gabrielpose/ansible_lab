@@ -17,6 +17,6 @@ services:
     ports:
       - "2223:22"
     volumes:
-      - C:\Users\gabri\OneDrive\Escritorio\Git\Docker\ubuntu-ssh\ubuntu-sshd\ansible_core\data-volume:/data
+      - .\ansible_core\data-volume:/data
     environment:
       - ANSIBLE_HOST_KEY_CHECKING=False
