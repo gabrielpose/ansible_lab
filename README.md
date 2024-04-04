@@ -1,59 +1,45 @@
-# SSH-Enabled Ubuntu Docker Image
-
-[![Docker Image Deployment](https://github.com/aoudiamoncef/ubuntu-sshd/actions/workflows/ci_cd.yml/badge.svg)](https://github.com/aoudiamoncef/ubuntu-sshd/actions/workflows/ci_cd.yml)
-[![Docker Pulls](https://img.shields.io/docker/pulls/aoudiamoncef/ubuntu-sshd.svg)](https://hub.docker.com/r/aoudiamoncef/ubuntu-sshd)
-[![Maintenance](https://img.shields.io/badge/Maintained-Yes-green.svg)](https://github.com/aoudiamoncef/ubuntu-sshd)
-
-This Docker image provides an Ubuntu 22.04 base with SSH server enabled. It allows you to easily create SSH-accessible containers via SSH keys or with a default username and password.
+# SSH-Enabled Ubuntu Docker Images + Ansible core control image + docker-compose
 
 ## Usage
 
 ### Cloning the Repository
 
-To get started, clone the GitHub  [repository](https://github.com/aoudiamoncef/ubuntu-sshd) containing the Dockerfile and scripts:
+To get started, clone the GitHub  [repository](https://github.com/gabrielpose/ansible_lab.git)) containing the Dockerfiles, docker-compose:
 
 ```bash
-git clone https://github.com/aoudiamoncef/ubuntu-sshd
+git clone (https://github.com/gabrielpose/ansible_lab.git)
 cd ubuntu-sshd
 ```
 
-### Building the Docker Image
+### Building the Docker Images
 
-Build the Docker image from within the cloned repository directory:
-
-```bash
-docker build -t my-ubuntu-sshd:latest .
-```
-
-### Running a Container
-
-To run a container based on the image, use the following command:
+Build the Docker images from within the cloned repository directory:
 
 ```bash
-docker run -d -p host-port:22 -e SSH_USERNAME=myuser -e PASSWORD=mysecretpassword -e AUTHORIZED_KEYS="$(cat path/to/authorized_keys_file)" my-ubuntu-sshd:latest
+### Build ubuntu_ssh image
+docker build -t my-ubuntu_sshd:latest -f ./Dockerfile_ubuntu .
+### Build ubuntu with ansible core ansible_core image
+docker build -t ansible-core:latest -f ./Dockerfile_ansible .
 ```
 
-- `-d` runs the container in detached mode.
-- `-p host-port:22` maps a host port to port 22 in the container. Replace `host-port` with your desired port.
-- `-e SSH_USERNAME=myuser` sets the SSH username in the container. Replace `myuser` with your desired username.
-- `-e PASSWORD=mysecretpassword` sets the SSH user's password in the container. Replace `mysecretpassword` with your desired password.
-- `-e AUTHORIZED_KEYS="$(cat path/to/authorized_keys_file)"` sets authorized SSH keys in the container. Replace `path/to/authorized_keys_file` with the path to your authorized_keys file.
-- `my-ubuntu-sshd:latest` should be replaced with your Docker image's name and tag.
+### Running 2 ubuntu containers and ansible-core
+
+```bash
+docker-compose up -d
+```
+
+### Pre-configured user ###
+user: ansible
+pass: ansible
 
 ### SSH Access
 
-Once the container is running, you can SSH into it using the following command:
-
 ```bash
-ssh -p host-port myuser@localhost
+ssh -p 2221 ansible@127.0.0.1 (ubuntu_ssh1)
+ssh -p 2222 ansible@127.0.0.1 (ubuntu_ssh2)
+ssh -p 2223 ansible@127.0.0.1 (ansible-core)
 ```
 
-- `host-port` should match the port you specified when running the container.
-- Use the provided password or SSH key for authentication, depending on your configuration.
-
-### Note
-
-- If the `AUTHORIZED_KEYS` environment variable is empty when starting the container, it will still launch the SSH server, but no authorized keys will be configured. You have to mount your own authorized keys file or manually configure the keys in the container.
 
 ## License
 
