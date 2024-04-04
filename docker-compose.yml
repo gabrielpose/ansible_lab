@@ -16,4 +16,5 @@ services:
     command: bash -c "/usr/sbin/sshd -D"
     ports:
       - "2223:22"
-      
+    volumes:
+      - C:\Users\gabri\OneDrive\Escritorio\Git\Docker\ubuntu-ssh\ubuntu-sshd\ansible_core\data-volume:/data
