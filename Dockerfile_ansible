@@ -8,7 +8,7 @@ ENV PASSWORD=ansible
 ENV AUTHORIZED_KEYS="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN4AMaM+vEpVgjTNzDx+9XItAG3MZ+4SgDYf7ySCUfg9osnnb7QqWxMW2YJyNr5WgK4B3PkPt+K37vuUkurHEDYlT+SwoT9wRMjThxKk59mXxI4wsTlcP8XE8RCnk9daunShYacP1ZX598tubcP45cmYEynGBx6D5Ztf1g0pH2xTIj9hnexDJgedWhavTxBIQqOXvdtd9/WSLryKVqmKgJxUVnrbIcT2r4WvGqJiFTqx27Q8W8Fu3KPxQk486h7vJa4FYVzMCVl+4gTyZshDgBkEJKn6cJRFi4J46hZLNi3T5tzS0dto8JaWfgd02xXK642qJ3fbVPDch4nNZxlFRd rsa-key-20240403"
 # Install OpenSSH server and clean up
 RUN apt-get update -y\
-    && apt-get install -y openssh-server iputils-ping telnet iproute2 nano sudo systemctl\
+    && apt-get install -y openssh-server iputils-ping telnet iproute2 nano sudo systemctl sshpass\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

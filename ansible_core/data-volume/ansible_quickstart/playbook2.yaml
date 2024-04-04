@@ -1,0 +1,16 @@
+- name: My first play
+  hosts: ubuntu_ssh2
+  tasks:
+      - name: Buscar la línea "PubkeyAuthentication yes" en sshd_config
+        shell: "grep -q 'PubkeyAuthentication yes' /etc/ssh/sshd_config && echo 'found' || echo 'not found'"
+        register: pubkey_authentication_result
+        changed_when: false
+
+      - name: Cambiar PubkeyAuthentication yes por PubkeyAuthentication no
+        state: absent
+        replace:
+          path: /etc/ssh/sshd_config
+          regexp: '^PubkeyAuthentication yes'
+          replace: 'PubkeyAuthentication no'
+        when: pubkey_authentication_result.stdout == 'found'
+        

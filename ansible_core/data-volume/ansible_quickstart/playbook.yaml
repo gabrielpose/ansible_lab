@@ -1,5 +1,5 @@
 - name: My first play
-  hosts: myhosts
+  hosts: ubuntu_ssh2
   tasks:
    - name: Ping my hosts
      ansible.builtin.ping:
@@ -7,3 +7,15 @@
    - name: Print message
      ansible.builtin.debug:
       msg: Hello world
+
+   - name: Buscar la línea "# Authentication:" en sshd_config
+     shell: "grep -q '# Authentication:' /etc/ssh/sshd_config && echo 'found' || echo 'not found'"
+     register: authentication_line_result
+     changed_when: false
+     
+   - name: Agregar PubkeyAuthentication yes si la línea no está presente
+     lineinfile:
+       path: /etc/ssh/sshd_config
+       line: "PubkeyAuthentication yes"
+       insertafter: "# Authentication:"
+     when: authentication_line_result.stdout == 'found'
